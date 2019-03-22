@@ -11,7 +11,7 @@ defmodule SturdyUmbrellaWeb.KafkaConsumer do
     body = Jason.decode(value)
       |>get_body
     #Logger.debug(inspect(body))
-    if body["event_type"] === "analytics.view"
+    if body["event_type"] === "analytics.view" && get_in(body, ["meta", "page_type"]) === "article"
     do
       body
       |>store_uuid
