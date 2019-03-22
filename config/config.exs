@@ -26,6 +26,24 @@ config :phoenix, :json_library, Jason
 config :phoenix,
   template_engines: [leex: Phoenix.LiveView.Engine]
 
+# config :kaffe,
+#   producer: [
+#     endpoints: ['ec2-34-224-29-58.compute-1.amazonaws.com': 9092],
+#     # endpoints references [hostname: port]. Kafka is configured to run on port 9092.
+#     # In this example, the hostname is localhost because we've started the Kafka server
+#     # straight from our machine. However, if the server is dockerized, the hostname will
+#     # be called whatever is specified by that container (usually "kafka")
+#     topics: ["ingest-tracking-events"], # add a list of topics you plan to produce messages to
+#   ]
+
+config :kaffe,
+  consumer: [
+    endpoints:  ['10.3.100.246': 9092],
+    topics: ["ingest-tracking-events"],     # the topic(s) that will be consumed
+    consumer_group: "example-consumer-group",   # the consumer group for tracking offsets in Kafka
+    message_handler: UmbrellaConsumer,           # the module that will process messages
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

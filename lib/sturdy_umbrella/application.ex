@@ -18,6 +18,14 @@ defmodule SturdyUmbrella.Application do
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: SturdyUmbrella.Supervisor]
     Supervisor.start_link(children, opts)
+
+
+    import Supervisor.Spec
+    children = [
+      worker(Kaffe.Consumer, []) # calls to start Kaffe's Consumer module
+    ]
+    opts = [strategy: :one_for_one, name: UmbrellaConsumer.Supervisor]
+    Supervisor.start_link(children, opts)
   end
 
   # Tell Phoenix to update the endpoint configuration
