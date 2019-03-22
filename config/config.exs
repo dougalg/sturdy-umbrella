@@ -41,7 +41,7 @@ config :kaffe,
     endpoints:  ['10.3.100.246': 9092],
     topics: ["ingest-tracking-events"],     # the topic(s) that will be consumed
     consumer_group: "example-consumer-group",   # the consumer group for tracking offsets in Kafka
-    message_handler: UmbrellaConsumer,           # the module that will process messages
+    message_handler: SturdyUmbrellaWeb.KafkaConsumer,           # the module that will process messages
   ]
 
 # Import environment specific config. This must remain at the bottom

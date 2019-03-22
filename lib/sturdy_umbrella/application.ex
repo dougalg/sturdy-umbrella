@@ -6,6 +6,12 @@ defmodule SturdyUmbrella.Application do
   use Application
 
   def start(_type, _args) do
+    children = [
+      SturdyUmbrellaWeb.PageCache
+    ]
+    opts = [strategy: :one_for_one, name: SturdyUmbrellaWeb.PageCache.Supervisor]
+    Supervisor.start_link(children, opts)
+
     # List all child processes to be supervised
     children = [
       # Start the endpoint when the application starts
@@ -24,7 +30,7 @@ defmodule SturdyUmbrella.Application do
     children = [
       worker(Kaffe.Consumer, []) # calls to start Kaffe's Consumer module
     ]
-    opts = [strategy: :one_for_one, name: UmbrellaConsumer.Supervisor]
+    opts = [strategy: :one_for_one, name: SturdyUmbrellaWeb.KafkaConsumer.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
