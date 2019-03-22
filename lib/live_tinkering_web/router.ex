@@ -1,5 +1,5 @@
-defmodule SturdyUmbrellaWeb.Router do
-  use Phoenix.Router
+defmodule LiveTinkeringWeb.Router do
+  use LiveTinkeringWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,9 +13,11 @@ defmodule SturdyUmbrellaWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", SturdyUmbrella do
+  scope "/", LiveTinkeringWeb do
     pipe_through :browser
 
     get "/", PageController, :index
+
+    get "/bear_game", BearGameController, :index
   end
 end

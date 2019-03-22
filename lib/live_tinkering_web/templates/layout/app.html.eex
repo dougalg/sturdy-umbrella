@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>LiveTinkering · Phoenix Framework</title>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+  </head>
+  <body>
+    <header>
+      <section class="container">
+        <nav role="navigation">
+          <ul>
+            <li><a href="/">Home (clock demo)</a></li>
+            <li><a href="/bear_game">Keyboard Game</a></li>
+            <li><a href="https://hexdocs.pm/phoenix/overview.html" target="_blank">Phoenix</a> / <a href="https://github.com/phoenixframework/phoenix_live_view" target="_blank">Live View</a></li>
+          </ul>
+        </nav>
+        <a href="http://phoenixframework.org/" class="phx-logo">
+          <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix Framework Logo"/>
+        </a>
+      </section>
+    </header>
+    <main role="main" class="container">
+      <%= render @view_module, @view_template, assigns %>
+    </main>
+    <footer class="container">
+      <p>
+        If you'd like to see the code or try it yourself, you can see
+        it <a href="https://github.com/aleph-naught2tog/live_tinkering" target="_blank">here on GitHub</a>.
+      </p>
+      <p>
+        <a href="https://twitter.com/alephnaught2tog" target="_blank" class="small">@alephnaught2tog</a>
+      </p>
+      <p class="timestamp">
+        Last deployed: <%= last_compiled() %>
+        <br />
+        (100% a debugging timestamp 😁)
+      </p>
+    </footer>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <script>console.log('hello, fellow human!')</script>
+  </body>
+</html>
