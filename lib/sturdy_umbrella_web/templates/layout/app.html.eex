@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>LiveTinkering · Phoenix Framework</title>
+    <title>SturdyUmbrella · Phoenix Framework</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
   <body>
@@ -28,7 +28,7 @@
     <footer class="container">
       <p>
         If you'd like to see the code or try it yourself, you can see
-        it <a href="https://github.com/aleph-naught2tog/live_tinkering" target="_blank">here on GitHub</a>.
+        it <a href="https://github.com/aleph-naught2tog/sturdy_umbrella" target="_blank">here on GitHub</a>.
       </p>
       <p>
         <a href="https://twitter.com/alephnaught2tog" target="_blank" class="small">@alephnaught2tog</a>

@@ -2,7 +2,7 @@ use Mix.Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :live_tinkering, LiveTinkeringWeb.Endpoint,
+config :sturdy_umbrella, SturdyUmbrellaWeb.Endpoint,
   http: [port: 4002],
   server: false
 

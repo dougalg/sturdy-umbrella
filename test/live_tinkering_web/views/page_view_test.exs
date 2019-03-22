@@ -1,3 +1,3 @@
-defmodule LiveTinkeringWeb.PageViewTest do
-  use LiveTinkeringWeb.ConnCase, async: true
+defmodule SturdyUmbrellaWeb.PageViewTest do
+  use SturdyUmbrellaWeb.ConnCase, async: true
 end

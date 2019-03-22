@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :live_tinkering, LiveTinkeringWeb.Endpoint,
+config :sturdy_umbrella, SturdyUmbrellaWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -46,14 +46,14 @@ config :live_tinkering, LiveTinkeringWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :live_tinkering, LiveTinkeringWeb.Endpoint,
+config :sturdy_umbrella, SturdyUmbrellaWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{lib/live_tinkering_web/views/.*(ex)$},
-      ~r{lib/live_tinkering_web/templates/.*(eex)$},
-      ~r{lib/live_tinkering_web/live/.*(ex)$}
+      ~r{lib/sturdy_umbrella_web/views/.*(ex)$},
+      ~r{lib/sturdy_umbrella_web/templates/.*(eex)$},
+      ~r{lib/sturdy_umbrella_web/live/.*(ex)$}
     ]
   ]
 

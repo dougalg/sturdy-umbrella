@@ -1,4 +1,4 @@
-defmodule LiveTinkeringWeb.ErrorHelpers do
+defmodule SturdyUmbrellaWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -36,9 +36,9 @@ defmodule LiveTinkeringWeb.ErrorHelpers do
     # should be written to the errors.po file. The :count option is
     # set by Ecto and indicates we should also apply plural rules.
     if count = opts[:count] do
-      Gettext.dngettext(LiveTinkeringWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(SturdyUmbrellaWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(LiveTinkeringWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(SturdyUmbrellaWeb.Gettext, "errors", msg, opts)
     end
   end
 end

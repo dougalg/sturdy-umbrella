@@ -1,5 +1,5 @@
-defmodule LiveTinkeringWeb.ErrorView do
-  use LiveTinkeringWeb, :view
+defmodule SturdyUmbrellaWeb.ErrorView do
+  use SturdyUmbrellaWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

@@ -1,5 +1,5 @@
-defmodule LiveTinkeringWeb.Router do
-  use LiveTinkeringWeb, :router
+defmodule SturdyUmbrellaWeb.Router do
+  use SturdyUmbrellaWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,7 +13,7 @@ defmodule LiveTinkeringWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", LiveTinkeringWeb do
+  scope "/", SturdyUmbrellaWeb do
     pipe_through :browser
 
     get "/", PageController, :index

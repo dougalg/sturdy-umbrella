@@ -1,7 +1,7 @@
-defmodule LiveTinkeringWeb.BearGameController do
-  use LiveTinkeringWeb, :controller
+defmodule SturdyUmbrellaWeb.BearGameController do
+  use SturdyUmbrellaWeb, :controller
   alias Phoenix.LiveView
-  alias LiveTinkeringWeb.BearGameLive
+  alias SturdyUmbrellaWeb.BearGameLive
 
   def index(conn, params) do
     LiveView.Controller.live_render(conn, BearGameLive, session: %{})

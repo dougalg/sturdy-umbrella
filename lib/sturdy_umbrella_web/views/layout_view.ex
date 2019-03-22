@@ -1,5 +1,5 @@
-defmodule LiveTinkeringWeb.LayoutView do
-  use LiveTinkeringWeb, :view
+defmodule SturdyUmbrellaWeb.LayoutView do
+  use SturdyUmbrellaWeb, :view
 
   @compile_timestamp [Date.utc_today(), Time.utc_now()]
 

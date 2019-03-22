@@ -1,9 +1,9 @@
-defmodule LiveTinkering.MixProject do
+defmodule SturdyUmbrella.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :live_tinkering,
+      app: :sturdy_umbrella,
       version: "0.1.0",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -18,7 +18,7 @@ defmodule LiveTinkering.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {LiveTinkering.Application, []},
+      mod: {SturdyUmbrella.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

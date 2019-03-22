@@ -1,4 +1,4 @@
-defmodule LiveTinkeringWeb.ClockLive do
+defmodule SturdyUmbrellaWeb.ClockLive do
   use Phoenix.LiveView
 
   # Must be a number greater than or equal to 1

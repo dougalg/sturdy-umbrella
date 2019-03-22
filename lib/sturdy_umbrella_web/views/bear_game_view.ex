@@ -1,5 +1,5 @@
-defmodule LiveTinkeringWeb.BearGameView do
-  use LiveTinkeringWeb, :view
+defmodule SturdyUmbrellaWeb.BearGameView do
+  use SturdyUmbrellaWeb, :view
   alias Game.Cell
 
   def grid(values) do

@@ -1,4 +1,4 @@
-defmodule LiveTinkeringWeb.ChannelCase do
+defmodule SturdyUmbrellaWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,7 +21,7 @@ defmodule LiveTinkeringWeb.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint LiveTinkeringWeb.Endpoint
+      @endpoint SturdyUmbrellaWeb.Endpoint
     end
   end
 

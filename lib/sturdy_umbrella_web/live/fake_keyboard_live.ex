@@ -1,6 +1,6 @@
-defmodule LiveTinkeringWeb.FakeKeyboardLive do
+defmodule SturdyUmbrellaWeb.FakeKeyboardLive do
   use Phoenix.LiveView
-  alias LiveTinkeringWeb.BearGameView
+  alias SturdyUmbrellaWeb.BearGameView
 
   def render(assigns) do
     BearGameView.render("fake_keyboard.html", assigns)

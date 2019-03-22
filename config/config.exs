@@ -8,11 +8,11 @@
 use Mix.Config
 
 # Configures the endpoint
-config :live_tinkering, LiveTinkeringWeb.Endpoint,
+config :sturdy_umbrella, SturdyUmbrellaWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "GDMQPLUkLSPoqUT8vaimRrwv6oFFFWn3ooE/g9fd6aU95V3yeTBabNCj4zc70MkZ",
-  render_errors: [view: LiveTinkeringWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: LiveTinkering.PubSub, adapter: Phoenix.PubSub.PG2],
+  render_errors: [view: SturdyUmbrellaWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: SturdyUmbrella.PubSub, adapter: Phoenix.PubSub.PG2],
   live_view: [signing_salt: "gqKkGatgzyF+N1umutKWxm5fuaAKDFDR"]
 
 # Configures Elixir's Logger

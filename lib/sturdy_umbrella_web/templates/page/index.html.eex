@@ -1,6 +1,6 @@
 <section id="render_target" style="flex-direction: column; justify-content: center; align-items: center">
   <p>
-    <%= live_render(@conn, LiveTinkeringWeb.ClockLive) %>
+    <%= live_render(@conn, SturdyUmbrellaWeb.ClockLive) %>
   </p>
   <p>
     <small>

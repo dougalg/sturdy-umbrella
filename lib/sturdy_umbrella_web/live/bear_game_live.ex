@@ -1,6 +1,6 @@
-defmodule LiveTinkeringWeb.BearGameLive do
+defmodule SturdyUmbrellaWeb.BearGameLive do
   use Phoenix.LiveView
-  alias LiveTinkeringWeb.BearGameView
+  alias SturdyUmbrellaWeb.BearGameView
 
   import Game.Grid
 

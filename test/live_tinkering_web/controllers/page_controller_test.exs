@@ -1,5 +1,5 @@
-defmodule LiveTinkeringWeb.PageControllerTest do
-  use LiveTinkeringWeb.ConnCase
+defmodule SturdyUmbrellaWeb.PageControllerTest do
+  use SturdyUmbrellaWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, "/")
