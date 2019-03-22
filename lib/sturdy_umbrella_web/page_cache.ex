@@ -10,4 +10,8 @@ defmodule SturdyUmbrellaWeb.PageCache do
   def handle_call(:asd, _from, _) do
     :ets.new(:page_cache, [:set, :public, :named_table])
   end
+
+  # def increment_page_count(page_uuid) do
+  #   :ets.update_counter(:page_cache, pageUuid, {2, 1}, {pageUuid, 0})
+  # end
 end
