@@ -23,7 +23,7 @@ defmodule SturdyUmbrellaWeb.ClockLive do
           <img
             class="circle"
             src="https://viafoura.com/wp-content/uploads/Eric-1.png"
-            style="transform: translateX(<%= rem(div(count, 25) * 25, 1000) %>px) rotate(<%= Kernel.trunc(div(count, 25) * 25 * 1.5) %>deg);"
+            style="transform: translateX(<%= rem(div(count, 10) * 20, 1000) %>px) rotate(<%= Kernel.trunc(div(count, 10) * 20 * 1.5) %>deg);"
           />
           
         </li>
