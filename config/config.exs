@@ -38,7 +38,7 @@ config :phoenix,
 
 config :kaffe,
   consumer: [
-    endpoints:  ['10.3.100.246': 9092],
+    endpoints:  ['10.3.68.131': 9092],
     topics: ["ingest-tracking-events"],     # the topic(s) that will be consumed
     consumer_group: "example-consumer-group",   # the consumer group for tracking offsets in Kafka
     message_handler: SturdyUmbrellaWeb.KafkaConsumer,           # the module that will process messages

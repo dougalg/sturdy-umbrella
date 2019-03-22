@@ -270,3 +270,17 @@ header nav a {
 .game-wrapper article {
   padding: 0 5rem;
 }
+
+.circle {
+  width: 120px;
+  height: 120px;
+  border: 2px solid black;
+  border-radius: 50%;
+  transition: all 0.166s;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+}

@@ -5,13 +5,26 @@ defmodule SturdyUmbrellaWeb.ClockLive do
   # Must be a number greater than or equal to 1
   #   Erlang only supports resolutions of 1ms or greater.
   @update_frequency 1
+  @total_rotations 12
 
   # Called by `live_render` in our template
   def render(assigns) do
-    ~L[<ol><%= for {page, count} <- @time do %>
-       <li><%= page %> has <%= count %> views</li>
-       <% end %>
-       </ol>
+    ~L[
+      <ol class="list">
+      <%= for {page, count} <- @time do %>
+        <li class="item">
+          <p class="item-header">
+            <%= page %> has <%= count %> views
+          </p>
+          <img
+            class="circle"
+            src="https://viafoura.com/wp-content/uploads/Eric-1.png"
+            style="transform: translateX(<%= rem(count * 10, 1000) %>px) rotate(<%= count * 10 * 1.5 %>deg);"
+          />
+          
+        </li>
+      <% end %>
+      </ol>
     ]
   end
 
