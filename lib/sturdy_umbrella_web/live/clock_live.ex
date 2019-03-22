@@ -19,7 +19,7 @@ defmodule SturdyUmbrellaWeb.ClockLive do
           <img
             class="circle"
             src="https://viafoura.com/wp-content/uploads/Eric-1.png"
-            style="transform: translateX(<%= rem(count * 10, 1000) %>px) rotate(<%= count * 10 * 1.5 %>deg);"
+            style="transform: translateX(<%= rem(div(count, 25) * 25, 1000) %>px) rotate(<%= Kernel.trunc(div(count, 25) * 25 * 1.5) %>deg);"
           />
           
         </li>
@@ -46,6 +46,6 @@ defmodule SturdyUmbrellaWeb.ClockLive do
   end
 
   defp update_time(socket) do
-    assign(socket, :time, Enum.take(Enum.sort(:ets.tab2list(:page_cache), fn ({page1, count1}, {page2, count2}) -> count1 > count2 end), 100))
+    assign(socket, :time, Enum.take(Enum.sort(:ets.tab2list(:page_cache), fn ({page1, count1}, {page2, count2}) -> count1 > count2 end), 10))
   end
 end
