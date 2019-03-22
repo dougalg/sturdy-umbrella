@@ -2,9 +2,4 @@
   <p>
     <%= live_render(@conn, SturdyUmbrellaWeb.ClockLive) %>
   </p>
-  <p>
-    <small>
-      (There's a new <a href="/bear_game">keyboard event demo</a>, too!)
-    </small>
-  </p>
 </section>
