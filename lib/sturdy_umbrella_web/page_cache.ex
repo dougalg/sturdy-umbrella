@@ -3,12 +3,11 @@ defmodule SturdyUmbrellaWeb.PageCache do
 
   def start_link(_) do
     {:ok, pid} = GenServer.start_link(__MODULE__, [])
-    # GenServer.call(pid, :page_cache)
+    :ets.new(:page_cache, [:set, :public, :named_table])
     {:ok, pid}
   end
 
   def handle_call(:asd, _from, _) do
-    :ets.new(:page_cache, [:set, :public, :named_table])
   end
 
   # def increment_page_count(page_uuid) do

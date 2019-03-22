@@ -1,14 +1,12 @@
 defmodule SturdyUmbrellaWeb.KafkaConsumer do
 
-  @name :asdasd
+  @name :page_cache
 
   # function to accept Kafka messaged MUST be named "handle_message"
   # MUST accept arguments structured as shown here
   # MUST return :ok
   # Can do anything else within the function with the incoming message
   def handle_message(%{key: key, value: value} = message) do
-    :ets.new(@name, [:set, :public, :named_table])
-
     IO.puts("Handling new kafka message")
 
     Jason.decode(value)
