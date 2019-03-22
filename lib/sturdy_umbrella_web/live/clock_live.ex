@@ -11,11 +11,15 @@ defmodule SturdyUmbrellaWeb.ClockLive do
   def render(assigns) do
     ~L[
       <ol class="list">
-      <%= for {page, count} <- @time do %>
+      <%= for {page, count, title, url, img} <- @time do %>
         <li class="item">
-          <p class="item-header">
-            <%= page %> has <%= count %> views
+          <a href="<%= url %>">
+            <%= title %>
+          </a>
+          <p>
+            <%= count %> views
           </p>
+          <img class="page-image" src="<%= img %>"/>
           <img
             class="circle"
             src="https://viafoura.com/wp-content/uploads/Eric-1.png"
@@ -46,6 +50,6 @@ defmodule SturdyUmbrellaWeb.ClockLive do
   end
 
   defp update_time(socket) do
-    assign(socket, :time, Enum.take(Enum.sort(:ets.tab2list(:page_cache), fn ({page1, count1}, {page2, count2}) -> count1 > count2 end), 10))
+    assign(socket, :time, Enum.take(Enum.sort(:ets.tab2list(:page_cache), fn (a, b) -> Kernel.elem(a, 1) > Kernel.elem(b, 1) end), 10))
   end
 end

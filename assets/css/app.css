@@ -151,3 +151,8 @@ header nav a {
   flex-direction: column;
   list-style-type: none;
 }
+
+.page-image {
+  height: auto;
+  width: 100px;
+}

@@ -14,8 +14,6 @@ defmodule SturdyUmbrellaWeb.KafkaConsumer do
     if body["event_type"] === "analytics.view"
     do
       body
-      |>get_in(["view"])
-      |>get_in(["pageUuid"])
       |>store_uuid
       |>SturdyUmbrellaWeb.ClockLive.count_changed
     end
@@ -28,8 +26,35 @@ defmodule SturdyUmbrellaWeb.KafkaConsumer do
     body
   end
 
-  def store_uuid(pageUuid) do
-    :ets.update_counter(@name, pageUuid, {2, 1}, {pageUuid, 0})
+  def get_page_uuid(body) do
+    body
+    |>get_in(["view", "pageUuid"])
+  end
+
+  def get_title(body) do
+    body
+    |>get_in(["meta"])
+    |>get_in(["title"])
+  end
+
+  def get_url(body) do
+    body
+    |>get_in(["meta"])
+    |>get_in(["url"])
+  end
+
+  def get_img(body) do
+    body
+    |>get_in(["meta"])
+    |>get_in(["pageImage"])
+  end
+
+  def store_uuid(body) do
+    page_uuid = get_page_uuid(body)
+    title = get_title(body)
+    url = get_url(body)
+    img = get_img(body)
+    :ets.update_counter(@name, page_uuid, {2, 1}, {page_uuid, 0, title, url, img, })
   end
 
 end

@@ -276,11 +276,16 @@ header nav a {
   height: 120px;
   border: 2px solid black;
   border-radius: 50%;
-  transition: all 0.166s;
+  transition: all 0.75s;
 }
 
 .list {
   display: flex;
   flex-direction: column;
   list-style-type: none;
+}
+
+.page-image {
+  height: auto;
+  width: 100px;
 }
