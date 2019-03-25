@@ -9,8 +9,8 @@ defmodule SturdyUmbrella.Application do
     import Supervisor.Spec
 
     children = [
-      SturdyUmbrellaWeb.PageCache,
-      SturdyUmbrellaWeb.Endpoint,
+      {SturdyUmbrellaWeb.PageCache, name: Cache},
+      {SturdyUmbrellaWeb.Endpoint, name: Sturdy},
       worker(Kaffe.Consumer, []) # calls to start Kaffe's Consumer module
     ]
     opts = [strategy: :one_for_one, name: SturdyUmbrellaWeb.PageCache.Supervisor]

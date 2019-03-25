@@ -17,7 +17,11 @@ config :sturdy_umbrella, SturdyUmbrellaWeb.Endpoint,
 
 # Configures Elixir's Logger
 config :logger, :console,
+  level: :warn,
   format: "$time $metadata[$level] $message\n",
+  compile_time_purge_matching: [
+    [application: :kaffe],
+  ],
   metadata: [:request_id]
 
 # Use Jason for JSON parsing in Phoenix
@@ -38,9 +42,9 @@ config :phoenix,
 
 config :kaffe,
   consumer: [
-    endpoints:  ['10.3.68.131': 9092],
+    endpoints:  ['main.kafka.viafoura.net': 9092],
     topics: ["ingest-tracking-events"],     # the topic(s) that will be consumed
-    consumer_group: "example-consumer-group",   # the consumer group for tracking offsets in Kafka
+    consumer_group: "mrco-group",   # the consumer group for tracking offsets in Kafka
     message_handler: SturdyUmbrellaWeb.KafkaConsumer,           # the module that will process messages
   ]
 
