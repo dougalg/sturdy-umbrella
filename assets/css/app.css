@@ -1,9 +1,11 @@
 /* This file is for your main application css. */
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i');
 
 @import "./phoenix.css";
 
 html {
   height: 100vh;
+  font-family: Roboto, Helvetica, sans-serif;
 }
 
 body {
@@ -28,6 +30,8 @@ body {
 header {
   padding-left: 10rem;
   padding-right: 10rem;
+
+  text-align: center;
 }
 
 main + footer {
@@ -146,6 +150,8 @@ header nav a {
 
   width: 100%;
   max-width: 940px;
+
+  margin: 0 auto;
 }
 
 .page-item {
@@ -154,7 +160,7 @@ header nav a {
 }
 
 .page-item + .page-item {
-  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .page-content {
