@@ -10,10 +10,12 @@ defmodule SturdyUmbrellaWeb.ClockLive do
   # Called by `live_render` in our template
   def render(assigns) do
     ~L[
-      <ol class="list" style="width: 100%;">
-      <%= for {page, count, title, url, img, roller_img, idx} <- @time do %>
-        <li class="page-item" style="transform: translateY(<%= idx * 100 %>%)">
-          <%= idx %>
+      <ol class="page-list">
+      <%= for {page, count, title, url, img, roller_img, time, rank} <- @time do %>
+        <li
+          class="page-item"
+        >
+          <%= rank + 1 %>
           <a href="<%= url %>">
             <%= title %>
           </a>
@@ -29,7 +31,7 @@ defmodule SturdyUmbrellaWeb.ClockLive do
             <img
               class="rolling-image"
               src="<%= roller_img %>"
-              style="transform: translateX(<%= rem(div(count, 10) * 20, 1000) %>px) rotate(<%= Kernel.trunc(div(count, 10) * 20 * 1.5) %>deg);"
+              style="transform: translateX(<%= rem(div(count, 10) * 20, 800) %>px) rotate(<%= Kernel.trunc(div(count, 10) * 20 * 1.5) %>deg);"
             />
           </div>
         </li>
@@ -56,10 +58,11 @@ defmodule SturdyUmbrellaWeb.ClockLive do
   end
 
   defp update_time(socket) do
-    vals = Enum.take(Enum.sort(:ets.tab2list(:page_cache), fn (a, b) -> Kernel.elem(a, 1) > Kernel.elem(b, 1) end), 10)
-    vals = Enum.with_index(vals)
-      |> Enum.map(fn ({ values, idx }) -> Tuple.append(values, idx) end)
-      |> Enum.sort(fn (a, b) -> Kernel.elem(a, 3) > Kernel.elem(b, 3) end)
+    idx = 0;
+    vals = Enum.sort(:ets.tab2list(:page_cache), fn (a, b) -> Kernel.elem(a, 1) > Kernel.elem(b, 1) end)
+      |> Enum.take(10)
+      |> Enum.with_index
+      |> Enum.map(fn ({ values, i }) -> Tuple.append(values, i) end)
     assign(socket, :time, vals)
   end
 end

@@ -89,6 +89,11 @@ defmodule SturdyUmbrellaWeb.KafkaConsumer do
     |>get_in(["pageImage"])
   end
 
+  def get_time(body) do
+    body
+    |>get_in(["time"])
+  end
+
   def get_roller_img() do
     idx = Enum.random(0..length(@roller_img_urls) - 1)
     res = List.pop_at(@roller_img_urls, idx, @roller_default_img)
@@ -97,12 +102,14 @@ defmodule SturdyUmbrellaWeb.KafkaConsumer do
   end
 
   def store_uuid(body) do
+    IO.inspect(body)
     page_uuid = get_page_uuid(body)
     title = get_title(body)
     url = get_url(body)
     img = get_img(body)
+    time = get_time(body)
     roller_img = get_roller_img()
-    :ets.update_counter(@name, page_uuid, {2, 1}, {page_uuid, 0, title, url, img, roller_img })
+    :ets.update_counter(@name, page_uuid, {2, 1}, {page_uuid, 0, title, url, img, roller_img, time })
   end
 
 end

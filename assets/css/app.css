@@ -137,22 +137,24 @@ header nav a {
   padding: 0 5rem;
 }
 
-.list {
+.page-list {
   display: flex;
   flex-direction: column;
   list-style-type: none;
 
   position: relative;
+
+  width: 100%;
+  max-width: 940px;
 }
 
 .page-item {
-  position: absolute;
-  top: 0;
   transition: all 0.2s;
+  width: 100%;
 }
 
-.page-item {
-  border-top: 1px solid black;
+.page-item + .page-item {
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .page-content {
