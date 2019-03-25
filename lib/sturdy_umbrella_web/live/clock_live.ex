@@ -10,6 +10,10 @@ defmodule SturdyUmbrellaWeb.ClockLive do
   # Called by `live_render` in our template
   def render(assigns) do
     ~L[
+      <button phx-click="race-on">Race</button>
+      <%= if @mode === :race do %>
+        <button phx-click="race-start">Start</button>
+      <% end %>
       <ol class="page-list">
       <%= for {page, count, title, url, img, roller_img, time, rank} <- @time do %>
         <li
@@ -40,6 +44,10 @@ defmodule SturdyUmbrellaWeb.ClockLive do
     ]
   end
 
+  def handle_event("race-on", _, socket) do
+    update(socket, :mode, :race) 
+  end
+
   def count_changed(thing) do
     send self(), {:update}
   end
@@ -50,7 +58,7 @@ defmodule SturdyUmbrellaWeb.ClockLive do
       :timer.send_interval(@update_frequency, self(), :update)
     end
 
-    {:ok, update_time(socket)}
+    {:ok, assign(socket, mode: :list, time: []) }
   end
 
   def handle_info(:update, socket) do
@@ -63,6 +71,6 @@ defmodule SturdyUmbrellaWeb.ClockLive do
       |> Enum.take(10)
       |> Enum.with_index
       |> Enum.map(fn ({ values, i }) -> Tuple.append(values, i) end)
-    assign(socket, :time, vals)
+    assign(socket, time: vals)
   end
 end
