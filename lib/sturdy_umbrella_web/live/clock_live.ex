@@ -4,7 +4,7 @@ defmodule SturdyUmbrellaWeb.ClockLive do
   require Logger
   # Must be a number greater than or equal to 1
   #   Erlang only supports resolutions of 1ms or greater.
-  @update_frequency 1
+  @update_frequency 100
   @total_rotations 12
 
   # Called by `live_render` in our template
@@ -45,11 +45,11 @@ defmodule SturdyUmbrellaWeb.ClockLive do
   end
 
   def handle_event("race-on", _, socket) do
-    update(socket, :mode, :race) 
+    {:noreply, assign(socket, mode: :race)} 
   end
 
   def count_changed(thing) do
-    send self(), {:update}
+#    send self(), :update
   end
 
   # Runs once, on page load

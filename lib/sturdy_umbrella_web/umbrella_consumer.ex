@@ -102,7 +102,6 @@ defmodule SturdyUmbrellaWeb.KafkaConsumer do
   end
 
   def store_uuid(body) do
-    IO.inspect(body)
     page_uuid = get_page_uuid(body)
     title = get_title(body)
     url = get_url(body)
