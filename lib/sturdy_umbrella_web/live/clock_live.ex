@@ -10,22 +10,28 @@ defmodule SturdyUmbrellaWeb.ClockLive do
   # Called by `live_render` in our template
   def render(assigns) do
     ~L[
-      <ol class="list">
-      <%= for {page, count, title, url, img} <- @time do %>
-        <li class="item">
+      <ol class="list" style="width: 100%;">
+      <%= for {page, count, title, url, img, roller_img, idx} <- @time do %>
+        <li class="page-item" style="transform: translateY(<%= idx * 100 %>%)">
+          <%= idx %>
           <a href="<%= url %>">
             <%= title %>
           </a>
-          <p>
-            <%= count %> views
-          </p>
-          <img class="page-image" src="<%= img %>"/>
-          <img
-            class="circle"
-            src="https://viafoura.com/wp-content/uploads/Eric-1.png"
-            style="transform: translateX(<%= rem(div(count, 10) * 20, 1000) %>px) rotate(<%= Kernel.trunc(div(count, 10) * 20 * 1.5) %>deg);"
-          />
-          
+          <div class="page-content">
+            <div class="page-meta">
+              <p>
+                <%= count %> views
+              </p>
+              <div class="page-image-container">
+                <img class="page-image" src="<%= img %>"/>
+              </div>
+            </div>
+            <img
+              class="rolling-image"
+              src="<%= roller_img %>"
+              style="transform: translateX(<%= rem(div(count, 10) * 20, 1000) %>px) rotate(<%= Kernel.trunc(div(count, 10) * 20 * 1.5) %>deg);"
+            />
+          </div>
         </li>
       <% end %>
       </ol>
@@ -50,6 +56,10 @@ defmodule SturdyUmbrellaWeb.ClockLive do
   end
 
   defp update_time(socket) do
-    assign(socket, :time, Enum.take(Enum.sort(:ets.tab2list(:page_cache), fn (a, b) -> Kernel.elem(a, 1) > Kernel.elem(b, 1) end), 10))
+    vals = Enum.take(Enum.sort(:ets.tab2list(:page_cache), fn (a, b) -> Kernel.elem(a, 1) > Kernel.elem(b, 1) end), 10)
+    vals = Enum.with_index(vals)
+      |> Enum.map(fn ({ values, idx }) -> Tuple.append(values, idx) end)
+      |> Enum.sort(fn (a, b) -> Kernel.elem(a, 3) > Kernel.elem(b, 3) end)
+    assign(socket, :time, vals)
   end
 end
