@@ -326,9 +326,33 @@ header nav a {
   border: 2px solid black;
   border-radius: 50%;
 
-  transition: all 0.75s;
 }
 
 .rolling-image--visible {
   opacity: 1;
 }
+
+.rolling {
+  transition: all 0.75s;
+}
+
+.finisher {
+  animation: spin1 0.5s infinite linear;
+  margin-left: 800px;
+}
+
+@keyframes spin1 {
+  0% {
+  -moz-transform:rotate(320deg);
+  -webkit-transform:rotate(320deg);
+  -o-transform:rotate(320deg);
+  -ms-transform:rotate(320deg);
+  }
+  100% {
+  -moz-transform:rotate(680deg);
+  -webkit-transform:rotate(680deg);
+  -o-transform:rotate(680deg);
+  -ms-transform:rotate(680deg);
+  }
+}
+

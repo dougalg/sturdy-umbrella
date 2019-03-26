@@ -5,6 +5,9 @@ defmodule SturdyUmbrellaWeb.ClockLive do
   # Must be a number greater than or equal to 1
   #   Erlang only supports resolutions of 1ms or greater.
   @update_frequency 100
+  @view_max  300
+  @position_max  800
+  @update_smoothing  7
   @roller_img_urls [
     "https://viafoura.com/wp-content/uploads/Jesse-1.png",
     "https://viafoura.com/wp-content/uploads/Ray-1.png",
@@ -49,9 +52,9 @@ defmodule SturdyUmbrellaWeb.ClockLive do
 
   # Called by `live_render` in our template
   def render(assigns) do
-  view_max = 300
-  position_max = 800
-  update_smoothing = 7
+  position_max = @position_max
+  view_max = @view_max
+  update_smoothing = @update_smoothing
     ~L[
       <button phx-click="race-on">Race</button>
       <%= if @mode === :race do %>
@@ -80,9 +83,9 @@ defmodule SturdyUmbrellaWeb.ClockLive do
             </div>
              <%= if @mode === :race do %>
             <img
-              class="rolling-image <%= if count > view_max do %>finisher<% end %>"
+              class="rolling-image <%= if count > view_max do %>finisher<% else %>rolling <% end %>"
               src="<%= roller_img %>"
-              style="transform: translateX(<%= min(Kernel.trunc(div(count, update_smoothing) * update_smoothing * (position_max /view_max)) , position_max) %>px) rotate(<%= Kernel.trunc(div(count, update_smoothing) * update_smoothing * 5) %>deg);"
+              style="transform: translateX(<%= min(wow(count), position_max) %>px) rotate(<%= if count < view_max do Kernel.trunc(div(count, update_smoothing) * update_smoothing * 5) else 0 end %>deg);"
             />
             <% end %>
           </div>
@@ -90,6 +93,10 @@ defmodule SturdyUmbrellaWeb.ClockLive do
       <% end %>
       </ol>
     ]
+  end
+
+  def wow(count) do
+    Kernel.trunc(div(count, @update_smoothing) * @update_smoothing * (@position_max /@view_max))
   end
 
   def handle_event("race-on", _, socket) do
