@@ -60,35 +60,42 @@ defmodule SturdyUmbrellaWeb.ClockLive do
       <%= if @mode === :race do %>
         <button phx-click="race-start">Start</button>
       <% end %>
-      <ol class="page-list">
+      <ol class="
+        page-list
+        <%= if @mode === :race do %>page-list--race<% end %>
+      ">
       <%= for {page, count, title, url, img, rim, time, rank, roller_img} <- @time do %>
         <li
-          class="page-item"
+          class="
+            page-item
+          "
         >
-          <h1><span><%= rank + 1 %></span>
-              <%= if @mode !== :race do %>
-              <div class="page-image-container">
-                <img class="page-image" src="<%= img %>"/>
-              </div>
-              <% end %>
+          <h1 class="page-rank">
+            <%= rank + 1 %>
           </h1>
-          <a href="<%= url %>">
-            <%= title %>
-          </a>
-          <div class="page-content">
-            <div class="page-meta">
-              <p>
-                <%= count %> views
-              </p>
-            </div>
-             <%= if @mode === :race do %>
-            <img
-              class="rolling-image <%= if count > view_max do %>finisher<% else %>rolling <% end %>"
-              src="<%= roller_img %>"
-              style="transform: translateX(<%= min(wow(count), position_max) %>px) rotate(<%= if count < view_max do Kernel.trunc(div(count, update_smoothing) * update_smoothing * 5) else 0 end %>deg);"
-            />
-            <% end %>
+          <%= if @mode !== :race do %>
+          <div class="page-image-container">
+            <img class="page-image" src="<%= img %>"/>
           </div>
+          <% end %>
+          <div class="page-content">
+            <a href="<%= url %>">
+              <%= title %>
+            </a>
+            <div class="page-meta">
+              <%= count %> views
+            </div>
+          </div>
+          <%= if @mode === :race do %>
+          <div
+            class="rolling-image <%= if count > view_max do %>finisher-image<% else %>rolling <% end %>"
+            style="margin-left: <%= min(wow(count), position_max) %>px; transform: rotate(<%= if count < view_max do Kernel.trunc(div(count, update_smoothing) * update_smoothing * 5) else 0 end %>deg);"
+          >
+            <img
+              src="<%= roller_img %>"
+            />
+          </div>
+          <% end %>
         </li>
       <% end %>
       </ol>
@@ -105,9 +112,9 @@ defmodule SturdyUmbrellaWeb.ClockLive do
     rt_list = real_time_list
     Process.put(:race_list, rt_list)
     Process.put(:avatar_list, Enum.shuffle(@roller_img_urls)|>Enum.take(Enum.count(rt_list)))
-    {:noreply, assign(socket, mode: :race, time: zeros())} 
+    {:noreply, assign(socket, mode: :race, time: zeros())}
   end
-  
+
   def handle_event("race-start", _, socket) do
     Logger.error(inspect(Supervisor.which_children(SturdyUmbrellaWeb.PageCache.Supervisor)))
     #send self(), :update_race
@@ -115,7 +122,7 @@ defmodule SturdyUmbrellaWeb.ClockLive do
     {ok, tref} = :timer.send_interval(@update_frequency, self(), :update_race)
     Process.put(:timer_ref, tref)
     GenServer.call(:Cache, :new_race)
-    {:noreply, socket } 
+    {:noreply, socket }
   end
 
   def count_changed(thing) do
@@ -149,9 +156,9 @@ defmodule SturdyUmbrellaWeb.ClockLive do
   end
 
   defp update_time(socket) do
-  if socket.assigns[:mode] == :list do 
-    assign(socket, time: real_time_list()|> Enum.map(fn (values) -> Tuple.append(values,"") end)) 
-    else 
+  if socket.assigns[:mode] == :list do
+    assign(socket, time: real_time_list()|> Enum.map(fn (values) -> Tuple.append(values,"") end))
+    else
     socket
     end
   end
@@ -162,7 +169,7 @@ defmodule SturdyUmbrellaWeb.ClockLive do
 
   defp reset_to_current() do
     Process.get(:race_list)
-    |> Enum.map(fn (thing) -> 
+    |> Enum.map(fn (thing) ->
     from_table = get_from_table(get_uuid(thing))
     update_to_value(from_table, Kernel.elem(from_table, 1))
     end)
@@ -195,12 +202,12 @@ defmodule SturdyUmbrellaWeb.ClockLive do
           update_value = Kernel.elem(from_table, 1) - Kernel.elem(thing, 1)
           update_to_value(from_table, update_value)
           end)
-    
+
     counts = vals
     |> Enum.map(fn (thing) -> Kernel.elem(thing, 1) end)
     |> Enum.sort
     |> Enum.reverse
-    
+
     ranked_vals = vals
     |> Enum.map(fn (val) -> Tuple.append(val, Enum.find_index(counts, fn x -> Kernel.elem(val,1) === x end)) end)
     |> Enum.zip(Process.get(:avatar_list))

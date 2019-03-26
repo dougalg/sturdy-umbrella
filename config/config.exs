@@ -42,9 +42,10 @@ config :phoenix,
 
 config :kaffe,
   consumer: [
-    endpoints:  ['main.kafka.viafoura.net': 9092],
+    endpoints:  ['10.3.36.186': 9092],
+    # endpoints:  ['main.kafka.viafoura.net': 9092],
     topics: ["ingest-tracking-events"],     # the topic(s) that will be consumed
-    consumer_group: "mrco2-group",   # the consumer group for tracking offsets in Kafka
+    consumer_group: "mrco3-group",   # the consumer group for tracking offsets in Kafka
     message_handler: SturdyUmbrellaWeb.KafkaConsumer,           # the module that will process messages
   ]
 
