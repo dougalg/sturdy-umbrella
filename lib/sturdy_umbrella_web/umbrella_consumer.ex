@@ -55,12 +55,14 @@ defmodule SturdyUmbrellaWeb.KafkaConsumer do
   end
 
   def store_uuid(body) do
+    {ok, dt} = DateTime.now("Etc/UTC")
     page_uuid = get_page_uuid(body)
     title = get_title(body)
     url = get_url(body)
     img = get_img(body)
-    time = get_time(body)
+    time = DateTime.to_unix(dt) * 1000
     :ets.update_counter(@name, page_uuid, {2, 1}, {page_uuid, 0, title, url, img, "", time })
+    ok = :ets.update_element(@name, page_uuid, {7, time})
   end
 
 end

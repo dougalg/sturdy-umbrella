@@ -11,7 +11,7 @@ defmodule SturdyUmbrellaWeb.PageCache do
   end
 
   def handle_call(:new_race, _from, state) do
-    {ok, tref} = :timer.send_interval(30000, self(), :zombie) 
+    {ok, tref} = :timer.send_interval(3000, self(), :zombie) 
     Logger.error("new race started from")
     Logger.error(inspect(_from))
     {:reply, :poo, state}
@@ -20,8 +20,16 @@ defmodule SturdyUmbrellaWeb.PageCache do
   def handle_info(:zombie, socket) do
     {ok, dt} = DateTime.now("Etc/UTC")
     :ets.tab2list(:page_cache)
-    |> Enum.filter(fn record -> Kernel.elem(record, 6) <  (DateTime.to_unix(dt) - 300) * 1000 end)
-    |> Enum.each(fn record -> Logger.error("removing thing")
+    |> Enum.filter(fn (record) -> 
+        diff = DateTime.to_unix(dt) * 1000 - Kernel.elem(record, 6) 
+          if(diff > 300000) do
+          Logger.error("Diff was #{diff}, #{Kernel.elem(record, 2)}")
+          true
+          else
+            false
+          end
+          end)
+    |> Enum.each(fn record ->
     :ets.delete(:page_cache, Kernel.elem(record, 0)) end)
     {:noreply, socket}
   end
